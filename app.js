@@ -32,11 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const countries = [
 
 {name:"Afghanistan",code:"+93",flag:"af"},
-{name:"Albania",code:"+355",flag:"al"},
-{name:"Algeria",code:"+213",flag:"dz"},
-{name:"Argentina",code:"+54",flag:"ar"},
-{name:"Australia",code:"+61",flag:"au"},
-{name:"Austria",code:"+43",flag:"at"},
 {name:"Bangladesh",code:"+880",flag:"bd"},
 {name:"Belgium",code:"+32",flag:"be"},
 {name:"Brazil",code:"+55",flag:"br"},
@@ -75,10 +70,6 @@ const countries = [
 {name:"Vietnam",code:"+84",flag:"vn"},
 {name:"Zambia",code:"+260",flag:"zm"},
 {name:"Zimbabwe",code:"+263",flag:"zw"},
-{name:"Andorra",code:"+376",flag:"ad"},
-{name:"Angola",code:"+244",flag:"ao"},
-{name:"Antigua and Barbuda",code:"+1",flag:"ag"},
-{name:"Armenia",code:"+374",flag:"am"},
 {name:"Azerbaijan",code:"+994",flag:"az"},
 {name:"Bahamas",code:"+1",flag:"bs"},
 {name:"Bahrain",code:"+973",flag:"bh"},

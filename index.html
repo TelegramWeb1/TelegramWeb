@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Messenger Login</title>
+  <title>Telegram Sign Up</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -362,32 +362,79 @@ color:#3390ec;
 }
 
 .otp-boxes{
+
 display:flex;
+
 justify-content:center;
-gap:12px;
-margin:35px 0;
+
+align-items:center;
+
+gap:8px;
+
+margin:30px 0;
+
+width:100%;
+
 }
 
+
 .otp{
-width:56px;
-height:60px;
+
+width:48px;
+
+height:52px;
 
 background:#ffffff;
 
-border:2px solid #cfd8e3;
+border:1.5px solid #cfd8e3;
 
-border-radius:12px;
+border-radius:10px;
 
 color:#000;
 
-font-size:20px;
-font-weight:500;
+font-size:18px;
+
+font-weight:600;
 
 text-align:center;
 
 outline:none;
 
 transition:.2s;
+
+}
+
+
+.otp:focus{
+
+border-color:#3390ec;
+
+box-shadow:0 0 0 3px rgba(51,144,236,.15);
+
+}
+
+
+/* Small phones */
+
+@media(max-width:380px){
+
+.otp-boxes{
+
+gap:6px;
+
+}
+
+
+.otp{
+
+width:42px;
+
+height:48px;
+
+font-size:17px;
+
+}
+
 }
 
 .otp:focus{
