@@ -354,7 +354,6 @@ try {
 loginPage.style.display = "none";
 
 verifyPage.style.display = "flex";
-    
 
 });
 
