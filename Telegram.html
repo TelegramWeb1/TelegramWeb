@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messenger Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #3390ec;
+      --primaryHover: #2481de;
+      --border: #dfe3e8;
+      --text: #20262e;
+      --muted: #707579;
+      --bg: #eef2f5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body{
+
+margin:0;
+background:#EEF3F7;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+min-height:100vh;
+
+padding:40px;
+
+}
+
+.login{
+
+width:420px;
+min-height:650px;
+
+background:#fff;
+
+border-radius:18px;
+
+padding:56px 48px;
+
+box-shadow:
+0 16px 60px rgba(0,0,0,.08);
+
+display:flex;
+flex-direction:column;
+
+}
+
+    .logo{
+
+width:90px;
+height:90px;
+
+margin:auto;
+margin-bottom:30px;
+
+border-radius:50%;
+
+background:linear-gradient(
+135deg,
+#37AEE2,
+#1C92D2
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+box-shadow:
+0 10px 25px rgba(28,146,210,.30);
+
+}
+
+  h1{
+    font-size:21px;
+    font-weight:500;
+    color:#20262e;
+    text-align:center;
+    margin-bottom:8px;
+}
+
+    .subtitle {
+      text-align: center;
+      font-size: 15px;
+      line-height: 24px;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    select,
+    input {
+      width: 100%;
+      height: 56px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0 18px;
+      font-size: 16px;
+      outline: none;
+      transition: .25s;
+      background: #fff;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(51, 144, 236, .15);
+    }
+
+    button {
+      width: 100%;
+      height: 56px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    button:hover {
+      background: var(--primaryHover);
+      transform: translateY(-1px);
+    }
+
+    .bottom {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 24px;
+    }
+
+    .bottom a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media(max-width:500px) {
+
+      body {
+        padding: 20px;
+        align-items: flex-start;
+      }
+
+      .login {
+        width: 100%;
+        margin-top: 40px;
+        padding: 36px 26px;
+        border-radius: 20px;
+      }
+
+      .logo {
+        width: 74px;
+        height: 74px;
+        font-size: 32px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+    }
+
+    .country{
+
+width:100%;
+height:56px;
+
+padding:0 16px;
+
+border:1px solid #d9dde3;
+border-radius:12px;
+
+font-size:16px;
+
+background:#fff;
+
+cursor:pointer;
+
+outline:none;
+
+transition:.25s;
+
+}
+
+.country:focus{
+
+border-color:#3390ec;
+
+box-shadow:0 0 0 4px rgba(51,144,236,.15);
+
+}
+
+.country-picker{
+position:relative;
+width:100%;
+}
+
+.selected-country{
+height:56px;
+border:1px solid #dfe3e8;
+border-radius:12px;
+display:flex;
+align-items:center;
+padding:0 16px;
+cursor:pointer;
+background:#fff;
+gap:12px;
+}
+
+.selected-country img{
+width:28px;
+height:20px;
+border-radius:3px;
+object-fit:cover;
+}
+
+.selected-country span:last-child{
+margin-left:auto;
+color:#3390ec;
+font-weight:600;
+}
+
+.country-popup{
+
+position:fixed;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%) scale(.95);
+
+width:420px;
+max-width:90vw;
+
+max-height:520px;
+height:auto;
+
+background:#fff;
+
+border-radius:18px;
+
+box-shadow:0 30px 80px rgba(0,0,0,.25);
+
+display:none;
+
+flex-direction:column;
+
+overflow:hidden;
+
+z-index:9999;
+
+opacity:0;
+
+transition:.2s;
+
+}
+
+.country-popup.active{
+
+display:flex;
+
+opacity:1;
+
+transform:translate(-50%,-50%) scale(1);
+
+}
+
+.country-overlay{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.18);
+
+backdrop-filter:blur(2px);
+
+display:none;
+
+z-index:9998;
+
+}
+
+.country-overlay.active{
+
+display:block;
+
+}
+
+#countrySearch{
+width:100%;
+height:55px;
+border:none;
+border-bottom:1px solid #eee;
+padding:0 18px;
+font-size:16px;
+outline:none;
+border-radius:0;
+}
+
+#countryList{
+
+max-height:380px;
+overflow-y:auto;
+padding-bottom:8px;
+
+}
+
+.country-item{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px 18px;
+cursor:pointer;
+transition:.2s;
+}
+
+.country-item:hover{
+background:#f4f6f8;
+}
+
+.country-item img{
+width:28px;
+height:20px;
+border-radius:3px;
+}
+
+.country-item .code{
+margin-left:auto;
+font-weight:600;
+color:#3390ec;
+}
+
+.otp-boxes{
+display:flex;
+justify-content:center;
+gap:12px;
+margin:35px 0;
+}
+
+.otp{
+width:56px;
+height:60px;
+
+background:#ffffff;
+
+border:2px solid #cfd8e3;
+
+border-radius:12px;
+
+color:#000;
+
+font-size:20px;
+font-weight:500;
+
+text-align:center;
+
+outline:none;
+
+transition:.2s;
+}
+
+.otp:focus{
+border-color:#3390ec;
+box-shadow:0 0 0 4px rgba(51,144,236,.15);
+}
+
+.resend{
+
+margin-top:auto;
+
+text-align:center;
+
+font-size:14px;
+
+color:#7a7a7a;
+
+}
+
+.resend a{
+
+color:#3390ec;
+
+text-decoration:none;
+
+font-weight:600;
+
+}
+
+.verify-text{
+    text-align:center;
+    line-height:1.5;
+    margin-bottom:30px;
+}
+
+.verify-text strong{
+    display:block;
+    margin-top:6px;
+    font-size:16px;
+    font-weight:500;
+    color:#20262e;
+    letter-spacing:.2px;
+}
+
+.wrong-number{
+    display:block;
+    margin-top:8px;
+    color:#3390ec;
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.wrong-number:hover{
+    text-decoration:underline;
+}
+  </style>
+
+</head>
+
+<body>
+
+  <div class="login" id="loginPage">
+
+  <div class="logo">
+  
+    <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+      <path
+        d="M21.2 3.4L2.8 10.7C2.2 10.9 2.2 11.8 2.8 12L7.6 13.6L9.3 19.8C9.5 20.5 10.4 20.6 10.8 20L13.8 15.9L18.5 19.3C19 19.7 19.7 19.4 19.8 18.8L22 4.2C22.1 3.6 21.7 3.2 21.2 3.4Z"
+        fill="white" />
+  
+    </svg>
+  
+  </div>
+
+    <h1>Sign in</h1>
+
+    <p class="subtitle">
+      Enter your country and phone number to continue.
+    </p>
+
+    <div class="field">
+      <label>Country</label>
+
+      <div class="country-picker">
+      
+        <div class="selected-country" id="selectedCountry">
+      
+          <img id="selectedFlag" src="https://flagcdn.com/w40/ng.png" alt="Nigeria">
+      
+          <span id="selectedName">
+            Nigeria
+          </span>
+      
+          <span id="selectedCode">
+            +234
+          </span>
+      
+        </div>
+
+        <div class="country-overlay" id="countryOverlay"></div>
+      
+        <div class="country-popup" id="countryPopup">
+      
+          <input id="countrySearch" type="text" placeholder="Search country...">
+      
+          <div id="countryList"></div>
+      
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Phone Number</label>
+
+      <input type="tel" id="phoneNumber" placeholder="Phone Number">
+    </div>
+
+    <button id="nextBtn">
+      Next
+    </button>
+
+    <div class="bottom">
+      Need help?
+      <a href="#">Contact Support</a>
+    </div>
+
+  </div>
+
+<div class="login" id="verifyPage" style="display:none;">
+
+  <div class="logo">
+
+    <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M21.2 3.4L2.8 10.7C2.2 10.9 2.2 11.8 2.8 12L7.6 13.6L9.3 19.8C9.5 20.5 10.4 20.6 10.8 20L13.8 15.9L18.5 19.3C19 19.7 19.7 19.4 19.8 18.8L22 4.2C22.1 3.6 21.7 3.2 21.2 3.4Z"
+        fill="white" />
+    </svg>
+
+  </div>
+
+  <h1>Check your messages</h1>
+
+  <p class="subtitle verify-text">
+    We have sent your verification code to
+    <strong id="verifyPhone"></strong>
+    <a href="#" class="wrong-number" id="wrongNumber">
+      Wrong number?
+    </a>
+  </p>
+
+<div class="otp-boxes">
+
+  <input class="otp" type="text" maxlength="1" inputmode="numeric">
+
+  <input class="otp" type="text" maxlength="1" inputmode="numeric">
+
+  <input class="otp" type="text" maxlength="1" inputmode="numeric">
+
+  <input class="otp" type="text" maxlength="1" inputmode="numeric">
+
+  <input class="otp" type="text" maxlength="1" inputmode="numeric">
+
+</div>
+
+  <p class="resend">
+
+    Didn't receive the code?
+
+    <br>
+
+    <a href="#">Send again</a>
+
+  </p>
+
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+
+</html>
